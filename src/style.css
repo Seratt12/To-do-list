@@ -144,3 +144,10 @@ input[type=checkbox] {
     margin-bottom: 1em;
     background-color: rgb(46, 46, 46);
 }
+
+mark {
+    background-color: #717270;
+    color: white;
+    padding: 0 0.1em;
+    border-radius: 0.2em;
+}

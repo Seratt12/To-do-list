@@ -1,7 +1,7 @@
 "use strict";
 
 import { createParagraph, createOptions, isValidTitle, createEmptyState } from "./functions";
-import { setTasks } from "./state";
+import { getSearchQuery, setTasks } from "./state";
 import { getAllCount, getDoneCount } from "./stat"
 import { getVisibleTasks } from "./selectors";
 
@@ -33,9 +33,10 @@ export function renderTasks(): void {
     clearTasks()
 
     const tasks = getVisibleTasks();
+    const query = getSearchQuery()
     if (tasks && tasks.length > 0) {
         tasks.forEach((task) => {
-            printTask(task)
+            printTask(task, query)
         })
     }
     else {
@@ -64,12 +65,20 @@ export function toggleTask(key: number): void {
     renderTasks()
 }
 
-export function printTask(task: ITask): void {
+export function printTask(task: ITask, query: string): void {
     const list = document.getElementById('todo-list');
     const newTask = document.createElement('li');
     newTask.className = 'todo-item';
 
+    let titleHTML = task.title
+    query = query.trim()
+    if (query) {
+        const regex = new RegExp(`(${query})`, "gi"); // глобально и без учёта регистра
+        titleHTML = task.title.replace(regex, "<mark>$1</mark>");
+    }
+
     const p = createParagraph(task.title);
+    p.innerHTML = titleHTML;
     newTask.appendChild(p);
 
     const todoOptions = createOptions(task.completed);
