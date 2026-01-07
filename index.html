@@ -12,14 +12,19 @@
     </header>
     <main>
       <div class="to-do-container">
+        <input type="text" id="search-input" placeholder="Поиск задачи" />
         <ul id="todo-list">
         </ul>
       </div>
       <aside>
         <form id="todo-form">
-          <input type="text" id="todo-input" placeholder="Новое дело" required />
+          <input type="text" id="todo-input" placeholder="Новая задача" required />
           <button type="submit">Добавить</button>
         </form>
+        <div class="to-do-stat">
+          <p>Всего задач: <span id="total-count">0</span></p>
+          <p>Выполнено задач: <span id="completed-count">0</span></p>
+        </div>
       </aside>
     </main>
     <script type="module" src="/src/main.ts"></script>

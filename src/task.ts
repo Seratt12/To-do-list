@@ -1,7 +1,9 @@
 "use strict";
 
-import { createParagraph, createOptions, isValidTitle, createEmptyState } from "./functions.js";
-import { getTasks, setTasks } from "./state.js";
+import { createParagraph, createOptions, isValidTitle, createEmptyState } from "./functions";
+import { setTasks } from "./state";
+import { getAllCount, getDoneCount } from "./stat"
+import { getVisibleTasks } from "./selectors";
 
 export interface ITask {
     key: number;
@@ -21,17 +23,16 @@ export function addTask(title: string): void {
         return
     }
 
-    setTasks((tasks) => {
-        tasks.push({key: Date.now(), title: title, completed: false})
-        return tasks
-    })
+    setTasks((tasks) => 
+        [...tasks, {key: Date.now(), title: title, completed: false}]
+    )
     renderTasks()
 }
 
 export function renderTasks(): void {
     clearTasks()
 
-    const tasks = getTasks();
+    const tasks = getVisibleTasks();
     if (tasks && tasks.length > 0) {
         tasks.forEach((task) => {
             printTask(task)
@@ -44,17 +45,22 @@ export function renderTasks(): void {
             list.appendChild(p);
         }
     }
+
+    const allElement = document.getElementById('total-count')
+    allElement!.textContent = getAllCount().toString()
+
+    const completedElement = document.getElementById('completed-count')
+    completedElement!.textContent = getDoneCount().toString()
 }
 
 export function toggleTask(key: number): void {
-    setTasks((tasks) => {
-        const task = tasks.find((task) => task.key === key)
-        if (task) {
-            task.completed = !task.completed
-        }
-        return tasks
-    })
-
+    setTasks((tasks) =>
+        tasks.map((task) =>
+            task.key === key
+                ? { ...task, completed: !task.completed }
+                : task
+        )
+    )
     renderTasks()
 }
 

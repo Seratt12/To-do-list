@@ -1,5 +1,5 @@
 import { addTask, deleteTask, renderTasks, toggleTask } from "./task";
-import { load } from "./state";
+import { load, setSearchQuery } from "./state";
 
 load();
 
@@ -31,5 +31,12 @@ document.getElementById("todo-list")?.addEventListener("click", (e) => {
         toggleTask(key)
     }
 })
+
+const searchInput = document.getElementById("search-input") as HTMLInputElement;
+
+searchInput?.addEventListener("input", () => {
+    setSearchQuery(searchInput.value);
+    renderTasks();
+});
 
 renderTasks();

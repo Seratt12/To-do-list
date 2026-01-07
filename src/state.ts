@@ -3,6 +3,7 @@ import type { ITask } from "./task";
 type TasksUpdater = (prev: ITask[]) => ITask[];
 
 let tasks: ITask[] = []
+let searchQuery: string = '';
 
 export function getTasks(): ITask[] {
     return tasks;
@@ -11,6 +12,14 @@ export function getTasks(): ITask[] {
 export function setTasks(updater: TasksUpdater): void {
     tasks = updater(tasks);
     save();
+}
+
+export function setSearchQuery(query: string): void {
+    searchQuery = query;
+}
+
+export function getSearchQuery(): string {
+    return searchQuery;
 }
 
 function save(): void {
