@@ -1,3 +1,6 @@
+import { openEditModal } from "./modal"
+import type { ITask } from "./task";
+
 export function createParagraph(text: string): HTMLParagraphElement {
     const p = document.createElement('p');
     p.textContent = text;
@@ -11,25 +14,31 @@ export function createEmptyState(): HTMLParagraphElement {
     return p;
 }
 
-export function createOptions(isCompleted: boolean): HTMLDivElement {
-    const todoOptions = document.createElement('div');
-    todoOptions.classList.add('todo-options');
+export function createOptions(task: ITask): HTMLDivElement {
+    const todoOptions = document.createElement('div')
+    todoOptions.classList.add('todo-options')
 
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.classList.add('chkbox');
-    if (isCompleted)
+    const checkbox = document.createElement('input')
+    checkbox.type = 'checkbox'
+    checkbox.classList.add('chkbox')
+    if (task.completed)
         checkbox.checked = true
 
-    todoOptions.appendChild(checkbox);
+    todoOptions.appendChild(checkbox)
 
-    const delBtn = document.createElement('button');
-    delBtn.className = 'del-btn';
-    delBtn.textContent = 'Удалить';
+    const delBtn = document.createElement('button')
+    delBtn.className = 'del-btn'
+    delBtn.textContent = 'Удалить'
 
-    todoOptions.appendChild(delBtn);
+    todoOptions.appendChild(delBtn)
 
-    return todoOptions;
+    const editBtn = document.createElement('button')
+    editBtn.textContent = 'Редактировать'
+    editBtn.className = 'change-btn'
+    editBtn.addEventListener("click", () => openEditModal(task))
+    todoOptions.appendChild(editBtn)
+
+    return todoOptions
 }
 
 export function isValidTitle(title: string): boolean {

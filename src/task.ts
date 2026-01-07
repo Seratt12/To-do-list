@@ -73,7 +73,7 @@ export function printTask(task: ITask, query: string): void {
     let titleHTML = task.title
     query = query.trim()
     if (query) {
-        const regex = new RegExp(`(${query})`, "gi"); // глобально и без учёта регистра
+        const regex = new RegExp(`(${query})`, "gi");
         titleHTML = task.title.replace(regex, "<mark>$1</mark>");
     }
 
@@ -81,7 +81,7 @@ export function printTask(task: ITask, query: string): void {
     p.innerHTML = titleHTML;
     newTask.appendChild(p);
 
-    const todoOptions = createOptions(task.completed);
+    const todoOptions = createOptions(task);
     newTask.appendChild(todoOptions);
 
     if (task.completed)
