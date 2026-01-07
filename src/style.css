@@ -112,6 +112,10 @@ input[type=checkbox] {
     background-color: rgb(46, 46, 46);
 }
 
+.todo-item > p {
+  font-size: 1.4rem;
+}
+
 .completed > p {
     opacity: 0.4;
     text-decoration: line-through;

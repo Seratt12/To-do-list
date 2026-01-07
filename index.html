@@ -1,27 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Список дел</title>
-  <script src="./script.js" type="module" defer></script>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <header>
-    <h1>Список дел</h1>
-  </header>
-  <main>
-    <div class="to-do-container">
-      <ul id="todo-list">
-      </ul>
-    </div>
-    <aside>
-      <form id="todo-form">
-        <input type="text" id="todo-input" placeholder="Новое дело" required />
-        <button type="submit">Добавить</button>
-      </form>
-    </aside>
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>to-do-list</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Список дел</h1>
+    </header>
+    <main>
+      <div class="to-do-container">
+        <ul id="todo-list">
+        </ul>
+      </div>
+      <aside>
+        <form id="todo-form">
+          <input type="text" id="todo-input" placeholder="Новое дело" required />
+          <button type="submit">Добавить</button>
+        </form>
+      </aside>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

@@ -1,4 +1,4 @@
-import { ITask } from "./task.js";
+import type { ITask } from "./task";
 
 type TasksUpdater = (prev: ITask[]) => ITask[];
 

@@ -1,5 +1,5 @@
-import { addTask, deleteTask, renderTasks, toggleTask } from "./src/task.js";
-import { load } from "./src/state.js";
+import { addTask, deleteTask, renderTasks, toggleTask } from "./task";
+import { load } from "./state";
 
 load();
 
