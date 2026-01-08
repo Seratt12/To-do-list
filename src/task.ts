@@ -13,7 +13,6 @@ export interface ITask {
 
 export function deleteTask(key: number): void {
     setTasks((prevTasks) => prevTasks.filter((task) => task.key !== key))
-    renderTasks()
 }
 
 export function addTask(title: string): void {
@@ -26,7 +25,6 @@ export function addTask(title: string): void {
     setTasks((tasks) => 
         [...tasks, {key: Date.now(), title: title, completed: false}]
     )
-    renderTasks()
 }
 
 export function renderTasks(): void {
@@ -62,7 +60,6 @@ export function toggleTask(key: number): void {
                 : task
         )
     )
-    renderTasks()
 }
 
 export function printTask(task: ITask, query: string): void {

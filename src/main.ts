@@ -1,7 +1,5 @@
-import { addTask, deleteTask, renderTasks, toggleTask } from "./task";
-import { load, setSearchQuery } from "./state";
-
-load();
+import { addTask, deleteTask, renderTasks, toggleTask } from "./task"
+import { load, setSearchQuery, subscribe } from "./state"
 
 const buttonAdd = document.querySelector("#todo-form button");
 
@@ -35,8 +33,8 @@ document.getElementById("todo-list")?.addEventListener("click", (e) => {
 const searchInput = document.getElementById("search-input") as HTMLInputElement;
 
 searchInput?.addEventListener("input", () => {
-    setSearchQuery(searchInput.value);
-    renderTasks();
+    setSearchQuery(searchInput.value)
 });
 
-renderTasks();
+subscribe(renderTasks)
+load()

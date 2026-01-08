@@ -1,9 +1,11 @@
 import type { ITask } from "./task";
 
 type TasksUpdater = (prev: ITask[]) => ITask[];
+type TaskSubscriber = () => void;
 
 let tasks: ITask[] = []
 let searchQuery: string = '';
+let subscribers: TaskSubscriber[] = []
 
 export function getTasks(): ITask[] {
     return tasks;
@@ -12,18 +14,28 @@ export function getTasks(): ITask[] {
 export function setTasks(updater: TasksUpdater): void {
     tasks = updater(tasks);
     save();
+    notify();
 }
 
 export function setSearchQuery(query: string): void {
     searchQuery = query;
+    notify()
 }
 
 export function getSearchQuery(): string {
     return searchQuery;
 }
 
+export function subscribe(fn: TaskSubscriber): void {
+    subscribers.push(fn)
+}
+
+function notify(): void {
+    subscribers.forEach((fn) => { fn() })
+}
+
 function save(): void {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks))
 }
 
 export function load(): void {
@@ -38,4 +50,6 @@ export function load(): void {
     } catch {
         tasks = []
     }
+
+    notify()
 }

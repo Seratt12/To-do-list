@@ -1,6 +1,5 @@
 import { isValidTitle } from "./functions"
 import type { ITask } from "./task"
-import { renderTasks } from "./task"
 import { setTasks } from "./state"
 
 let editingKey: number | null = null;
@@ -33,7 +32,6 @@ saveBtn.addEventListener("click", () => {
         setTasks((tasks) =>
             tasks.map((t) => (t.key === editingKey ? { ...t, title: newTitle } : t))
         );
-        renderTasks();
     }
     closeModal();
 });
