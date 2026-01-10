@@ -138,6 +138,11 @@ h1, h2 {
     border: none;
 }
 
+.completed > .todo-title > label {
+    text-decoration: line-through;
+    color: gray;
+}
+
 mark {
     background-color: #717270;
     color: white;
