@@ -1,5 +1,6 @@
 import { openEditModal } from "./modal"
-import type { ITask } from "./task";
+import deleteIcon from './images/delete-icon.png'
+import type { ITask } from "./task"
 
 export function createDiv(task: ITask): HTMLParagraphElement {
     const { key, title, completed} = task
@@ -47,7 +48,7 @@ export function createOptions(task: ITask): HTMLDivElement {
     
     const delIcon = document.createElement('img')
     delIcon.className = 'del-btn-icon'
-    delIcon.src = '/images/delete-icon.png'
+    delIcon.src = deleteIcon
 
     delBtn.appendChild(delIcon)
 
