@@ -1,10 +1,28 @@
 import { openEditModal } from "./modal"
 import type { ITask } from "./task";
 
-export function createParagraph(text: string): HTMLParagraphElement {
-    const p = document.createElement('p');
-    p.textContent = text;
-    return p;
+export function createDiv(task: ITask): HTMLParagraphElement {
+    const { key, title, completed} = task
+
+    const div = document.createElement('div')
+    div.className = 'todo-title'
+
+    const checkbox = document.createElement('input')
+    checkbox.type = 'checkbox'
+    checkbox.name = 'is-completed'
+    checkbox.id = `is-completed-${key}`
+    checkbox.classList.add('chkbox')
+    if (completed)
+        checkbox.checked = true
+
+    div.appendChild(checkbox)
+
+    const label = document.createElement('label');
+    label.textContent = title;
+    label.setAttribute('for', `is-completed-${key}`)
+
+    div.appendChild(label)
+    return div;
 }
 
 export function createEmptyState(): HTMLParagraphElement {
@@ -18,29 +36,26 @@ export function createOptions(task: ITask): HTMLDivElement {
     const todoOptions = document.createElement('div')
     todoOptions.classList.add('todo-options')
 
-    const checkbox = document.createElement('input')
-    checkbox.type = 'checkbox'
-    checkbox.classList.add('chkbox')
-    if (task.completed)
-        checkbox.checked = true
-
-    todoOptions.appendChild(checkbox)
-
-    const delBtn = document.createElement('button')
-    delBtn.className = 'del-btn'
-    delBtn.textContent = 'Удалить'
-
-    todoOptions.appendChild(delBtn)
-
     const editBtn = document.createElement('button')
     editBtn.textContent = 'Редактировать'
     editBtn.className = 'change-btn'
     editBtn.addEventListener("click", () => openEditModal(task))
     todoOptions.appendChild(editBtn)
 
+    const delBtn = document.createElement('button')
+    delBtn.className = 'del-btn'
+    
+    const delIcon = document.createElement('img')
+    delIcon.className = 'del-btn-icon'
+    delIcon.src = './images/delete-icon.png'
+
+    delBtn.appendChild(delIcon)
+
+    todoOptions.appendChild(delBtn)
+
     return todoOptions
 }
 
 export function isValidTitle(title: string): boolean {
-    return title.length > 0 && title.length <= 100
+    return title.length > 0 && title.length <= 37
 }

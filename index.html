@@ -7,25 +7,23 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <header>
-      <h1>Список дел</h1>
-    </header>
     <main>
+      <h1>Список дел</h1>
+      <form id="todo-form">
+        <input type="text" id="todo-input" placeholder="Новая задача" required />
+        <button type="submit" id="add-btn">Добавить</button>
+      </form>
+      <input type="text" id="search-input" placeholder="Поиск задачи" />
+      <div class="to-do-stat-del-info">
+        <div class="to-do-stat">
+          <p>Всего задач: <span id="total-count">0</span></p>
+        </div>
+        <button id="del-btn-all">Удалить всё</button>
+      </div>
       <div class="to-do-container">
-        <input type="text" id="search-input" placeholder="Поиск задачи" />
         <ul id="todo-list">
         </ul>
       </div>
-      <aside>
-        <form id="todo-form">
-          <input type="text" id="todo-input" placeholder="Новая задача" required />
-          <button type="submit">Добавить</button>
-        </form>
-        <div class="to-do-stat">
-          <p>Всего задач: <span id="total-count">0</span></p>
-          <p>Выполнено задач: <span id="completed-count">0</span></p>
-        </div>
-      </aside>
     </main>
     <div id="edit-modal" class="modal-overlay hidden">
       <div class="modal">
@@ -33,7 +31,7 @@
         <input type="text" id="edit-input" />
         <div class="modal-buttons">
           <button id="save-btn" class="done-btn">Сохранить</button>
-          <button id="cancel-btn" class="del-btn">Отмена</button>
+          <button id="cancel-btn">Отмена</button>
         </div>
       </div>
     </div>

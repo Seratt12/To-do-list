@@ -1,4 +1,4 @@
-import { addTask, deleteTask, renderTasks, toggleTask } from "./task"
+import { addTask, deleteTask, renderTasks, toggleTask, clearTasks } from "./task"
 import { load, setSearchQuery, subscribe } from "./state"
 
 const buttonAdd = document.querySelector("#todo-form button");
@@ -17,7 +17,7 @@ if (buttonAdd) {
 
 document.getElementById("todo-list")?.addEventListener("click", (e) => {
     const target = e.target as HTMLElement
-    if (target.classList.contains("del-btn")) {
+    if (target.classList.contains("del-btn") || target.classList.contains("del-btn-icon")) {
         const li = target.closest("li")
         const key = Number(li?.dataset.key)
         deleteTask(key)
@@ -35,6 +35,15 @@ const searchInput = document.getElementById("search-input") as HTMLInputElement;
 searchInput?.addEventListener("input", () => {
     setSearchQuery(searchInput.value)
 });
+
+document.getElementById("del-btn-all")?.addEventListener("click", () => {
+    const confirmed = confirm("Вы уверены, что хотите удалить все задачи?")
+    if (!confirmed) {
+        return
+    }
+
+    clearTasks()
+})
 
 subscribe(renderTasks)
 load()
