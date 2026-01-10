@@ -47,7 +47,7 @@ export function createOptions(task: ITask): HTMLDivElement {
     
     const delIcon = document.createElement('img')
     delIcon.className = 'del-btn-icon'
-    delIcon.src = './images/delete-icon.png'
+    delIcon.src = '/images/delete-icon.png'
 
     delBtn.appendChild(delIcon)
 
